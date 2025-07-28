@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #0c92f2;
+  --background-color: #121212;
+  --text-primary: #E0E0E0;
+  --text-secondary: #A0A0A0;
+  --accent-color: #1E3A8A;
+  --card-background: #1E1E1E;
+  --button-hover: #1E3A8A;
+}
+
+@layer base {
+  * {
+    @apply border-dark-600;
+  }
+  
+  body {
+    @apply bg-[var(--background-color)] text-[var(--text-primary)];
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .button_primary {
+    @apply bg-[var(--primary-color)] text-white py-2 px-4 rounded-md transition-colors duration-200;
+  }
+  
+  .button_primary:hover {
+    @apply bg-[var(--button-hover)];
+  }
+  
+  .button_primary:focus {
+    @apply outline-none ring-2 ring-[var(--primary-color)] ring-opacity-50;
+  }
+  
+  .button_secondary {
+    @apply bg-transparent border border-[var(--text-secondary)] text-[var(--text-secondary)] py-2 px-4 rounded-md transition-colors duration-200;
+  }
+  
+  .button_secondary:hover {
+    @apply bg-[var(--button-hover)] text-white;
+  }
+  
+  .button_secondary:focus {
+    @apply outline-none ring-2 ring-[var(--primary-color)] ring-opacity-50;
+  }
+  
+  .input {
+    @apply bg-[var(--card-background)] border border-[var(--text-secondary)] text-[var(--text-primary)] rounded-md py-2 px-3 transition-colors duration-200;
+  }
+  
+  .input:focus {
+    @apply outline-none ring-2 ring-[var(--primary-color)] border-[var(--primary-color)];
+  }
+  
+  .typography_h1 {
+    @apply text-3xl font-bold text-[var(--text-primary)] mb-4;
+  }
+  
+  .typography_h2 {
+    @apply text-2xl font-semibold text-[var(--text-primary)] mb-3;
+  }
+  
+  .typography_body {
+    @apply text-base text-[var(--text-secondary)];
+  }
+  
+  .card {
+    @apply bg-[var(--card-background)] p-6 shadow-md;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-dark-800 hover:bg-dark-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 border border-dark-600;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-xl text-white placeholder-dark-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200;
+  }
+}
