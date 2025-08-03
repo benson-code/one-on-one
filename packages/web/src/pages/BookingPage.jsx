@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Calendar, Clock, MapPin, Star, Users, DollarSign, AlertCircle } from 'lucide-react'
+import { Calendar, Clock, MapPin, Star, Users, AlertCircle } from 'lucide-react'
 
 function BookingPage() {
   const { guideId } = useParams()
@@ -414,7 +414,6 @@ function BookingPage() {
                     </>
                   ) : (
                     <>
-                      <DollarSign className="w-4 h-4 mr-2" />
                       Book Now - ${total}
                     </>
                   )}
