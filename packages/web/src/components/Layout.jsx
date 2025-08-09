@@ -35,7 +35,7 @@ function Layout({ children }) {
                 探索
               </Link>
               <Link className="text-base font-medium hover:text-[var(--primary-color)] transition-colors" to="/register">
-                成為顧問
+                成為醫療顧問
               </Link>
               <Link className="text-base font-medium hover:text-[var(--primary-color)] transition-colors" to="/about">
                 關於ONEonone
@@ -45,13 +45,15 @@ function Layout({ children }) {
           <div className="flex items-center gap-2 sm:gap-4">
             {isAuthenticated ? (
               <div className="hidden sm:flex items-center gap-3">
-                <div 
-                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 sm:w-10 sm:h-10" 
+                <Link
+                  to={user?.userType === 'guide' ? '/guide/dashboard' : '/customer/dashboard'}
+                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 sm:w-10 sm:h-10 hover:ring-2 hover:ring-[var(--primary-color)] hover:ring-offset-2 hover:ring-offset-[var(--background-color)] transition-all duration-200 cursor-pointer" 
                   style={{
                     backgroundImage: `url("${user?.avatar || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMHjsUkZzwhLyFw9pRz9dYP3ajmxNZddc1ljPKIH87W11KW53-5DRP_8rjFOw1-DfZsIQPkQd0saOHD6am1ikrEQE7ELbV3dbEnjgCLADN2iPTazggASW7cDOIj_rsdc2rVgxpP3U0CmRM1vK4qW0MnuPPkofx1LJq2OrRip8NCxzJ2zajEMYKgdTN_XTnrTVFqw9xVsxlGxhku-CXlCq4qLN54IF8Arnyo20A2bSODvCmiCMhu3INZy0sm2Mz1HJipAdLY9Phd8Y1'}")`
                   }}
+                  title="前往會員中心"
                 >
-                </div>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="hidden lg:block text-sm font-medium text-[var(--text-secondary)] hover:text-red-400 transition-colors"
@@ -127,7 +129,7 @@ function Layout({ children }) {
                         {user?.name || '用戶'}
                       </p>
                       <p className="text-sm text-[var(--text-secondary)]">
-                        {user?.userType === 'guide' ? '導遊' : '旅客'}
+                        {user?.userType === 'guide' ? '醫師' : '旅客'}
                       </p>
                     </div>
                   </div>
@@ -147,7 +149,7 @@ function Layout({ children }) {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <span className="font-medium">探索導遊</span>
+                    <span className="font-medium">探索醫師</span>
                   </Link>
 
                   <Link 
@@ -158,7 +160,7 @@ function Layout({ children }) {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span className="font-medium">成為顧問</span>
+                    <span className="font-medium">成為醫療顧問</span>
                   </Link>
 
                   <Link 

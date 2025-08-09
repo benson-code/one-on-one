@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Search } from 'lucide-react'
+import taipeiImage from '../assets/taipei-101.jpg'
 
 function Home() {
 
@@ -27,20 +28,20 @@ function Home() {
 
   const featuredDestinations = [
     {
-      name: 'Paris',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB8qfaN11KR7IiA7EQLDoyJxjawHXNxzU2CNFmJbDPCv9f3vHIUEXfvC9FIlOtRrmqne7k4pXe6t5yQ5m4xQE3mS-fm4BfES-iaaac76Bfhem4ScLBKXoGLG4QH2xzkyPhOpJKPxIzlHuO2ov6Pr-PnCcWIzAL11ZECnAO6gd3Cfgs_do3VQVqUegIUO0HCvPZ2abpX74oPp_fr2MOb-fHSQm2ap0VokYTZvHi7mHfOEj7z_Lr0oVJFZ4-6m0WQxRApirtXXcOjkuk0'
+      name: 'New York',
+      image: 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'
     },
     {
       name: 'Tokyo',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZc2036SqXGKT4wywd6NtmlsUu1Ivp7tde-xh7Mah_FGyQhD3CV8Vb45ELSN-cxSwC-2itEK9-MB4hW4OWds3udC7i5ix-h_u-Kgb2WhBGNhGcTnFeSrw-yh4BbtJzzw6mpor92cHJetruKn_EdVzb_bUlM1bhvhlShLETAj5_m92bZ78J60wf8KEotXphVnNv45gy7NNjR6bdfKH2P_VCco7jPHkyG8XF8gMgjCLMRwzyGuFvl5ErrslqhJ-aTi8zlCi8ihRWWS3i'
+      image: 'https://images.pexels.com/photos/402028/pexels-photo-402028.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'
     },
     {
-      name: 'New York',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJ9eGiUGMksqgdRIzVMNSwvaK1laYpLNwsksDfM7t2VX6Ftllli1mKDOP4gnqZXNhVebTJ1WAuvkM19znNNLHFgXYhl7vaRLUenSJBdY3gu-xzdmG-rpsOo5sCk_t1A3kXC67RjERDXIihfnJa4VjpW2hP-21y-GCuZWp5316SoVgn4rXM153Hq6CjC6cuNpvc7nAdyGyTCH1NxJpwMiNH4S3rxZ6JRfjkjrm3rZ3yJyF_Ocup4xL6WefzDfb0jocgGYOib62fc4cx'
+      name: 'Taipei',
+      image: taipeiImage
     },
     {
-      name: 'Rome',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC_dW1_smdX2koviezag9rOT-PaUy2RxWc0_GxEX6iFlzsYTcK-f854gTA_jkU-ss-3ROC1GT0jTopondL4abKoqoeZV2nBYyt9aLJtNtM3Zozqex8ZZ9JdEKYNfUI2HBhUJ2312Lz8nSaxpEx9CKJgX8iM0BkMpyPv3Jq7qZXo_q3Ht4LiJghgjca6r1ydaUUyDNmdNWlmicGc94O6Nq791qkDCwaHmOqMksjCaI4GDsxX8IuLhyKP6PnLwn4kYdX-pFyo__19OJJu'
+      name: 'Bangkok',
+      image: 'https://images.pexels.com/photos/3355788/pexels-photo-3355788.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'
     }
   ]
 
@@ -89,8 +90,8 @@ function Home() {
                 className="w-full bg-center bg-no-repeat aspect-video bg-cover saturate-3 group-hover:saturate-100 transition-all duration-300" 
                 style={{backgroundImage: `url("${destination.image}")`}}
               ></div>
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
-                <h3 className="text-xl font-bold text-white">{destination.name}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                <h3 className="text-xl font-bold text-white drop-shadow-lg">{destination.name}</h3>
               </div>
             </div>
           ))}
