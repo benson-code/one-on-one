@@ -9,19 +9,19 @@ function Home() {
     {
       id: 1,
       name: 'Ethan Carter',
-      specialty: 'Expert in local history and culture',
+      specialty: 'Expert of Neurological surgery',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBJLzlS7ubnGckKEhFmdL5GW07p8hmLQq9ZLJrR7Jpgm3VDwCb6FJgx9FVPlaSiPXYKLFhDNADc3OvizkJ5samD01oDDlGSp7If9L0hcMP-o7csEP2ct6fV2R3OptWJjNjIztLKxF_I0ImnWiEAgO2Fev5YQswrRIgleY2Rs7gxheeKlvgWskSMc9UzkCuoP2fawHDDlmgCW4Kx9-CeEYNjtgLKBmDcPK-YXcU2IOXO8hP9tQWRhR8ggXlCymDwMFozf2bC4XzptndM'
     },
     {
       id: 2,
       name: 'Sophia Clark',
-      specialty: 'Specializes in food and wine tours',
+      specialty: 'Expert of Family Practice',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDuw14G_CKB4TosNeKnhsIxlF0KqI8C0HvPHfxyeHq9vBPhPCJc9qQyvN6f8UvTkWdJTA-aMvCoEV7gd8LMzk8SS9dV5W5CqOCjfDGJs4Xmztc6zoeLqh0ihl9Ms0gB5LYIYAAwzxfMliiTGlvdhNe8aLDt3eSH93DxXn1YlYRsYc4vRnw4IOMfOUYsxaGKl1P3DIInVMeA_pRa20Uj12toU-4-ECy-UJ3H2lh21A073-c8xhndShbX03M4g8Z1VPJ-s4ZbiRJO5kOf'
     },
     {
       id: 3,
       name: 'Liam Bennett',
-      specialty: 'Adventure and outdoor activities',
+      specialty: 'Expert of Plastic Surgery',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALacbFfxSjTlNhxRJgDzPBjhholoPMjTLy_VNi3URH7YFh8nnYFd5xS08UcAKKe_m0Gz1__xI95V1pCsRsNZ8uktdgIpyZgzvSdBk2jEF5dbOtrcqKN_C976g66tVpmm_0PTle-2TjAMRLA-hAAC58cdFgN8lBKk7IBUtxLZnDHv-q7rp66wmErtHJtbzJ7lCFOtFuXA2F9yrEthhRsAeo_hURA6u1x8IfQ0LFhoO875z4Hq_3JnUT6yiZrSvFjy7TFXeechDQ1hN4'
     }
   ]
@@ -51,7 +51,7 @@ function Home() {
       <div className="relative mb-12">
         <input 
           className="input w-full pl-12 pr-4 py-4 text-lg" 
-          placeholder="Where to? e.g., Paris, Tokyo, or New York" 
+          placeholder="Where to? e.g. Taipei, Tokyo..." 
           type="text"
         />
         <div className="absolute inset-y-0 left-0 flex items-center pl-4 text-[var(--text-secondary)]">
