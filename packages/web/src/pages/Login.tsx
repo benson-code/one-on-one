@@ -10,7 +10,7 @@ interface FormData {
   userType: UserType
 }
 
-function Login() {
+function Login(): JSX.Element {
   const { login, googleLogin, appleLogin } = useAuth()
   const navigate = useNavigate()
   

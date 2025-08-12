@@ -10,14 +10,19 @@ const generateId = () => 'mock_' + Date.now() + '_' + Math.random().toString(36)
 // 生成 JWT Token (模擬)
 const generateToken = (userId) => `mock_token_${userId}_${Date.now()}`
 
-// Mock 用戶數據庫
+// 安全的環境變數讀取
+const getEnvVar = (key, defaultValue = '') => {
+  return import.meta.env[key] || defaultValue
+}
+
+// Mock 用戶數據庫 - 使用環境變數
 let mockUsers = [
   {
     id: 'user_1',
     firstName: 'John',
     lastName: 'Doe',
-    email: 'john@example.com',
-    password: 'password123',
+    email: getEnvVar('VITE_MOCK_CUSTOMER_EMAIL', 'john@example.com'),
+    password: getEnvVar('VITE_MOCK_CUSTOMER_PASSWORD', 'secure_password_123'),
     userType: 'customer',
     createdAt: new Date().toISOString()
   },
@@ -25,8 +30,8 @@ let mockUsers = [
     id: 'guide_1',
     firstName: 'Jane',
     lastName: 'Smith',
-    email: 'jane@example.com',
-    password: 'password123',
+    email: getEnvVar('VITE_MOCK_GUIDE_EMAIL', 'jane@example.com'),
+    password: getEnvVar('VITE_MOCK_GUIDE_PASSWORD', 'secure_password_456'),
     userType: 'guide',
     createdAt: new Date().toISOString()
   }
@@ -339,8 +344,8 @@ export const resetMockData = () => {
       id: 'user_1',
       firstName: 'John',
       lastName: 'Doe',
-      email: 'john@example.com',
-      password: 'password123',
+      email: getEnvVar('VITE_MOCK_CUSTOMER_EMAIL', 'john@example.com'),
+      password: getEnvVar('VITE_MOCK_CUSTOMER_PASSWORD', 'secure_password_123'),
       userType: 'customer',
       createdAt: new Date().toISOString()
     },
@@ -348,8 +353,8 @@ export const resetMockData = () => {
       id: 'guide_1',
       firstName: 'Jane',
       lastName: 'Smith',
-      email: 'jane@example.com',
-      password: 'password123',
+      email: getEnvVar('VITE_MOCK_GUIDE_EMAIL', 'jane@example.com'),
+      password: getEnvVar('VITE_MOCK_GUIDE_PASSWORD', 'secure_password_456'),
       userType: 'guide',
       createdAt: new Date().toISOString()
     }

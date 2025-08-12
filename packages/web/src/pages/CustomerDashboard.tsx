@@ -1,12 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Calendar, MapPin, Star, Clock, DollarSign, User, Search } from 'lucide-react'
 
-function CustomerDashboard() {
+interface Guide {
+  name: string
+  avatar: string
+  rating: number
+}
+
+interface Booking {
+  id: number
+  guide: Guide
+  location: string
+  date: string
+  time: string
+  duration: number
+  price: number
+  status: 'confirmed' | 'pending' | 'cancelled'
+  paymentStatus: 'paid' | 'pending'
+}
+
+interface AuthUser {
+  firstName: string
+}
+
+function CustomerDashboard(): JSX.Element {
   const { user } = useAuth()
-  const [bookings, setBookings] = useState([])
-  const [loading, setLoading] = useState(true)
+  const typedUser = user as AuthUser
+  const [bookings, setBookings] = useState<Booking[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     // Mock data for demonstration
@@ -47,7 +70,7 @@ function CustomerDashboard() {
     }, 1000)
   }, [])
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string): string => {
     switch (status) {
       case 'confirmed':
         return 'text-green-400 bg-green-400/10'
@@ -77,7 +100,7 @@ function CustomerDashboard() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">
-            Welcome back, {user?.firstName}!
+            Welcome back, {typedUser?.firstName}!
           </h1>
           <p className="text-dark-300">
             Manage your bookings and discover new tour experiences

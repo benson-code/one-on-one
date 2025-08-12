@@ -191,7 +191,7 @@ function GuidesList() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-4">導遊列表</h1>
+          <h1 className="text-3xl font-bold mb-4">醫師列表</h1>
           
           {/* Search and Filter Bar */}
           <div className="flex flex-col lg:flex-row gap-4">

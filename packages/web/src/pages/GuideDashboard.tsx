@@ -1,12 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { Calendar, DollarSign, Users, Star, Clock, MapPin, TrendingUp, Settings } from 'lucide-react'
 
+interface Customer {
+  name: string
+  avatar: string
+}
+
+interface Booking {
+  id: number
+  customer: Customer
+  date: string
+  time: string
+  duration: number
+  price: number
+  status: 'confirmed' | 'pending' | 'completed'
+  location: string
+}
+
+interface Stats {
+  totalEarnings: number
+  monthlyEarnings: number
+  totalBookings: number
+  averageRating: number
+  responseRate: number
+  completionRate: number
+}
+
 function GuideDashboard() {
   const { user } = useAuth()
-  const [bookings, setBookings] = useState([])
-  const [stats, setStats] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [bookings, setBookings] = useState<Booking[]>([])
+  const [stats, setStats] = useState<Stats>({} as Stats)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     // Mock data for demonstration

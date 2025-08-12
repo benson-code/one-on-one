@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import taipeiImage from '../assets/taipei-101.jpg'
@@ -15,7 +14,7 @@ interface FeaturedDestination {
   image: string
 }
 
-function Home() {
+function Home(): JSX.Element {
   const featuredGuides: FeaturedGuide[] = [
     {
       id: 1,
@@ -57,7 +56,7 @@ function Home() {
   ]
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full max-w-5xl">
       {/* Search Section */}
       <div className="relative mb-12">
         <input 

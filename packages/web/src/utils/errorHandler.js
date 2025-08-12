@@ -1,31 +1,12 @@
 // 統一錯誤處理工具
+import { logger } from './logger'
 
 export const logError = (error, context = '') => {
-  if (process.env.NODE_ENV === 'development') {
-    console.error(`[${context}] Error:`, error)
-  } else {
-    // 生產環境發送到錯誤追蹤服務
-    try {
-      fetch('/api/logs/error', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: error.message,
-          stack: error.stack,
-          context,
-          timestamp: new Date().toISOString(),
-          userAgent: navigator.userAgent,
-          url: window.location.href
-        })
-      }).catch(() => {
-        // 靜默失敗，避免錯誤循環
-      })
-    } catch (e) {
-      // 錯誤記錄失敗，靜默處理
-    }
-  }
+  logger.error(`${context} 錯誤`, {
+    message: error.message,
+    stack: error.stack,
+    context
+  })
 }
 
 export const handleApiError = (error, context = 'API') => {

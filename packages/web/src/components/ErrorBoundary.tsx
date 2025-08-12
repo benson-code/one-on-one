@@ -58,7 +58,7 @@ class ErrorBoundary extends Component<Props, State> {
     this.setState({ hasError: false, error: null, errorInfo: null })
   }
 
-  render(): ReactNode {
+  render() {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-[var(--background-color)] px-4">

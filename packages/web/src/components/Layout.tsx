@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import { useState, ReactNode } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
@@ -11,7 +11,7 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps) {
   const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const handleLogout = (): void => {
     logout()
@@ -20,7 +20,7 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <div className="relative flex size-full min-h-screen flex-col overflow-x-hidden bg-[var(--background-color)] text-[var(--text-primary)]">
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Navigation */}
         <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--accent-color)] px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
@@ -118,21 +118,21 @@ function Layout({ children }: LayoutProps) {
               </div>
 
               {/* User Section */}
-              {isAuthenticated && user && (
+              {isAuthenticated && (
                 <div className="p-6 border-b border-[var(--accent-color)]">
                   <div className="flex items-center gap-3">
                     <div 
                       className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 h-12" 
                       style={{
-                        backgroundImage: `url("${user.avatar || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMHjsUkZzwhLyFw9pRz9dYP3ajmxNZddc1ljPKIH87W11KW53-5DRP_8rjFOw1-DfZsIQPkQd0saOHD6am1ikrEQE7ELbV3dbEnjgCLADN2iPTazggASW7cDOIj_rsdc2rVgxpP3U0CmRM1vK4qW0MnuPPkofx1LJq2OrRip8NCxzJ2zajEMYKgdTN_XTnrTVFqw9xVsxlGxhku-CXlCq4qLN54IF8Arnyo20A2bSODvCmiCMhu3INZy0sm2Mz1HJipAdLY9Phd8Y1'}")`
+                        backgroundImage: `url("${user?.avatar || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMHjsUkZzwhLyFw9pRz9dYP3ajmxNZddc1ljPKIH87W11KW53-5DRP_8rjFOw1-DfZsIQPkQd0saOHD6am1ikrEQE7ELbV3dbEnjgCLADN2iPTazggASW7cDOIj_rsdc2rVgxpP3U0CmRM1vK4qW0MnuPPkofx1LJq2OrRip8NCxzJ2zajEMYKgdTN_XTnrTVFqw9xVsxlGxhku-CXlCq4qLN54IF8Arnyo20A2bSODvCmiCMhu3INZy0sm2Mz1HJipAdLY9Phd8Y1'}")`
                       }}
                     />
                     <div>
                       <p className="font-semibold text-[var(--text-primary)]">
-                        {`${user.firstName || ''} ${user.lastName || ''}`.trim() || '用戶'}
+                        {user?.name || '用戶'}
                       </p>
                       <p className="text-sm text-[var(--text-secondary)]">
-                        {user.userType === 'guide' ? '醫師' : '旅客'}
+                        {user?.userType === 'guide' ? '醫師' : '旅客'}
                       </p>
                     </div>
                   </div>
@@ -246,8 +246,8 @@ function Layout({ children }: LayoutProps) {
         )}
 
         {/* Main Content */}
-        <main className="flex flex-1 justify-center py-6 sm:py-8 lg:py-12">
-          <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
+        <main className="flex flex-1 justify-center py-6 sm:py-8 lg:py-12 px-2 sm:px-4">
+          <div className="w-full max-w-7xl">
             {children}
           </div>
         </main>

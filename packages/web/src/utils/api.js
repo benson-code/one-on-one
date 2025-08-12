@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { safeLocalStorage } from './errorHandler'
+import { logger } from './logger'
 
 // API 基礎配置
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
@@ -306,17 +307,17 @@ export const createWebSocketConnection = (endpoint, onMessage, onError = null) =
       const data = JSON.parse(event.data)
       onMessage(data)
     } catch (error) {
-      console.error('WebSocket 訊息解析錯誤:', error)
+      logger.error('WebSocket 訊息解析錯誤', { error: error.message })
     }
   }
   
   ws.onerror = (error) => {
-    console.error('WebSocket 錯誤:', error)
+    logger.error('WebSocket 錯誤', { error: error.message })
     if (onError) onError(error)
   }
   
   ws.onclose = () => {
-    console.log('WebSocket 連線已關閉')
+    logger.websocket('關閉')
   }
   
   return ws

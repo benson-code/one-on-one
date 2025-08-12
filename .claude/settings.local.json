@@ -9,7 +9,17 @@
       "Bash(npx react-native:*)",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(mv:*)",
+      "Bash(npm run dev:*)",
+      "Bash(touch:*)",
+      "Bash(rm:*)",
+      "Bash(del Home.jsx)",
+      "Bash(for file in \"PaymentPage\" \"BookingPage\" \"GuidesList\")",
+      "Bash(do)",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

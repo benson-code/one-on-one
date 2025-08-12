@@ -1,8 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Heart, Shield, Users, Globe, Brain, MessageCircle, MapPin, Clock, Star, Award, CheckCircle, ArrowRight } from 'lucide-react'
 
-function About() {
-  const coreFeatures = [
+interface CoreFeature {
+  icon: React.ComponentType<{className: string}>
+  title: string
+  features: string[]
+}
+
+interface Reason {
+  icon: React.ComponentType<{className: string}>
+  title: string
+  description: string
+}
+
+interface TargetUser {
+  title: string
+  description: string
+  icon: React.ComponentType<{className: string}>
+}
+
+interface Testimonial {
+  quote: string
+  author: string
+  location: string
+}
+
+interface IconComponentProps {
+  className: string
+}
+
+function About(): JSX.Element {
+  const coreFeatures: CoreFeature[] = [
     {
       icon: Brain,
       title: 'AI 驅動的醫療推薦',
@@ -32,7 +60,7 @@ function About() {
     }
   ]
 
-  const reasons = [
+  const reasons: Reason[] = [
     {
       icon: Brain,
       title: 'AI 技術領先',
@@ -60,7 +88,7 @@ function About() {
     }
   ]
 
-  const targetUsers = [
+  const targetUsers: TargetUser[] = [
     {
       title: '國際患者',
       description: '尋求高品質、經濟實惠的醫療服務，並希望結合旅遊體驗的個人。',
@@ -83,7 +111,7 @@ function About() {
     }
   ]
 
-  const testimonials = [
+  const testimonials: Testimonial[] = [
     {
       quote: '一對一醫療旅遊 AI 平台讓我的心臟手術之旅變得輕鬆無比！AI 推薦的醫療機構完美符合我的需求，聊天機器人還幫我安排了新加坡的旅遊行程，體驗超棒！',
       author: '李小姐',
@@ -96,13 +124,13 @@ function About() {
     }
   ]
 
-  const [isVisible, setIsVisible] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [activeSection, setActiveSection] = useState<string>('')
 
   useEffect(() => {
     setIsVisible(true)
     
-    const observerOptions = {
+    const observerOptions: IntersectionObserverInit = {
       threshold: 0.1,
       rootMargin: '0px 0px -100px 0px'
     }
@@ -423,7 +451,7 @@ function About() {
                   
                   <div className={`relative bg-gradient-to-br from-dark-800/80 to-dark-700/80 backdrop-blur-xl rounded-3xl p-10 border ${colors.border} transition-all duration-500 hover:scale-105 shadow-2xl`}>
                     {/* Quote mark */}
-                    <div className={`absolute top-6 left-8 ${colors.accent} text-8xl font-serif opacity-20 group-hover:opacity-40 transition-opacity`}>“</div>
+                    <div className={`absolute top-6 left-8 ${colors.accent} text-8xl font-serif opacity-20 group-hover:opacity-40 transition-opacity`}>"</div>
                     
                     {/* Rating stars */}
                     <div className="flex gap-1 mb-6 relative z-10">
@@ -567,7 +595,7 @@ function About() {
                     green: { bg: 'from-green-500/20 to-emerald-500/20', border: 'border-green-500/30', text: 'text-green-400', icon: 'text-green-400' },
                     purple: { bg: 'from-purple-500/20 to-pink-500/20', border: 'border-purple-500/30', text: 'text-purple-400', icon: 'text-purple-400' },
                     blue: { bg: 'from-blue-500/20 to-cyan-500/20', border: 'border-blue-500/30', text: 'text-blue-400', icon: 'text-blue-400' }
-                  }[contact.color]
+                  }[contact.color as keyof typeof colors]
                   
                   return (
                     <div key={index} className="group">
@@ -616,19 +644,19 @@ function About() {
 }
 
 // Missing icons for target users
-const Building2 = ({ className }) => (
+const Building2: React.FC<IconComponentProps> = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
   </svg>
 )
 
-const Plane = ({ className }) => (
+const Plane: React.FC<IconComponentProps> = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
   </svg>
 )
 
-const TrendingUp = ({ className }) => (
+const TrendingUp: React.FC<IconComponentProps> = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
   </svg>
