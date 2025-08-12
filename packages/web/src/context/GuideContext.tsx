@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
 import { withErrorHandling } from '../utils/errorHandler'
 import { Guide, GuideContextType, GuideFilters } from '../types'
@@ -124,12 +124,17 @@ export function GuideProvider({ children }: GuideProviderProps) {
     },
     getGuideById: async (id: string) => {
       const result = await getGuideById(id)
-      if (result && typeof result === 'object' && 'id' in result) {
+      if (result && typeof result === 'object' && 'success' in result) {
+        if (result.success && result.data) {
+          return result.data as Guide
+        } else {
+          setError(result.error || '獲取導遊詳情失敗')
+          return null
+        }
+      } else if (result && typeof result === 'object' && 'id' in result) {
         return result as Guide
-      } else if (result && result.success) {
-        return result.data || null
       } else {
-        setError(result?.error || '獲取導遊詳情失敗')
+        setError('獲取導遊詳情失敗')
         return null
       }
     },

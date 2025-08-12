@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
-import { withErrorHandling, safeLocalStorage, logError, AsyncResult } from '../utils/errorHandler'
+import { withErrorHandling, safeLocalStorage } from '../utils/errorHandler'
 import { mockApi } from '../utils/mockApi'
 import { AuthContextType, User, UserType, RegisterData } from '../types'
 

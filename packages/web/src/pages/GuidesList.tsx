@@ -1,10 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MapPin, Star, Users, Search, Filter, ChevronDown } from 'lucide-react'
 
+interface MockGuide {
+  id: number
+  name: string
+  location: string
+  rating: number
+  reviewCount: number
+  price: number
+  hourlyRate: boolean
+  avatar: string
+  languages: string[]
+  specialties: string[]
+  description: string
+  verified: boolean
+  responseTime: string
+}
+
 function GuidesList() {
-  const [guides, setGuides] = useState([])
-  const [filteredGuides, setFilteredGuides] = useState([])
+  const [guides, setGuides] = useState<MockGuide[]>([])
+  const [filteredGuides, setFilteredGuides] = useState<MockGuide[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
@@ -158,7 +174,7 @@ function GuidesList() {
     setFilteredGuides(filtered)
   }, [searchTerm, filters, guides])
 
-  const handleFilterChange = (filterType, value) => {
+  const handleFilterChange = (filterType: string, value: string) => {
     setFilters(prev => ({
       ...prev,
       [filterType]: value

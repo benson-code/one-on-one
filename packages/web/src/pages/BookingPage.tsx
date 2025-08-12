@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Calendar, Clock, MapPin, Star, Users, AlertCircle } from 'lucide-react'
+import { Guide } from '../types'
 
 function BookingPage() {
-  const { guideId } = useParams()
+  const { guideId } = useParams<{ guideId: string }>()
   const navigate = useNavigate()
-  const { user, isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth()
   
-  const [guide, setGuide] = useState(null)
+  const [guide, setGuide] = useState<Guide | null>(null)
   const [loading, setLoading] = useState(true)
   const [booking, setBooking] = useState({
     date: '',
@@ -23,6 +24,11 @@ function BookingPage() {
 
   useEffect(() => {
     // Mock guide data fetch
+    if (!guideId) {
+      navigate('/')
+      return
+    }
+    
     setTimeout(() => {
       const mockGuide = {
         id: parseInt(guideId),
@@ -79,7 +85,7 @@ function BookingPage() {
     }
   }, [guide, booking.duration, booking.guests])
 
-  const handleBookingChange = (field, value) => {
+  const handleBookingChange = (field: string, value: any) => {
     setBooking(prev => ({
       ...prev,
       [field]: value
@@ -118,7 +124,7 @@ function BookingPage() {
     return true
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     if (!validateBooking()) return

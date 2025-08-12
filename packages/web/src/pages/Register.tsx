@@ -2,15 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Mail, Lock, Eye, EyeOff, User, AlertCircle } from 'lucide-react'
-
-interface FormData {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  confirmPassword: string
-  userType: 'customer' | 'guide'
-}
+import { RegisterData } from '../types'
 
 interface AuthResult {
   success: boolean
@@ -24,13 +16,15 @@ function Register(): JSX.Element {
   const { register, googleLogin, appleLogin } = useAuth()
   const navigate = useNavigate()
   
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegisterData>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    userType: 'customer'
+    userType: 'customer',
+    phoneNumber: '',
+    location: ''
   })
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false)

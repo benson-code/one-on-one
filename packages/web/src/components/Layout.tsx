@@ -129,7 +129,7 @@ function Layout({ children }: LayoutProps) {
                     />
                     <div>
                       <p className="font-semibold text-[var(--text-primary)]">
-                        {user?.name || '用戶'}
+                        {user ? `${user.firstName} ${user.lastName}` : '用戶'}
                       </p>
                       <p className="text-sm text-[var(--text-secondary)]">
                         {user?.userType === 'guide' ? '醫師' : '旅客'}

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Heart, Shield, Users, Globe, Brain, MessageCircle, MapPin, Clock, Star, Award, CheckCircle, ArrowRight } from 'lucide-react'
+import { Heart, Shield, Users, Globe, Brain, MessageCircle, MapPin, Clock, Star, Award, CheckCircle, ArrowRight, LucideIcon } from 'lucide-react'
 
 interface CoreFeature {
-  icon: React.ComponentType<{className: string}>
+  icon: LucideIcon
   title: string
   features: string[]
 }
 
 interface Reason {
-  icon: React.ComponentType<{className: string}>
+  icon: LucideIcon
   title: string
   description: string
 }
@@ -16,17 +16,13 @@ interface Reason {
 interface TargetUser {
   title: string
   description: string
-  icon: React.ComponentType<{className: string}>
+  icon: LucideIcon
 }
 
 interface Testimonial {
   quote: string
   author: string
   location: string
-}
-
-interface IconComponentProps {
-  className: string
 }
 
 function About(): JSX.Element {
@@ -125,7 +121,7 @@ function About(): JSX.Element {
   ]
 
   const [isVisible, setIsVisible] = useState<boolean>(false)
-  const [activeSection, setActiveSection] = useState<string>('')
+  const [_activeSection, _setActiveSection] = useState<string>('')
 
   useEffect(() => {
     setIsVisible(true)
@@ -138,7 +134,7 @@ function About(): JSX.Element {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id)
+          _setActiveSection(entry.target.id)
           entry.target.classList.add('animate-fade-in')
         }
       })
@@ -590,12 +586,21 @@ function About(): JSX.Element {
                   { icon: Users, title: '社交媒體', info: '@OneToOneHealthAI', color: 'purple' },
                   { icon: MapPin, title: '總部位置', info: '新加坡濱海灣金融中心', color: 'blue' }
                 ].map((contact, index) => {
-                  const colors = {
+                  type ColorScheme = {
+                    bg: string
+                    border: string
+                    text: string
+                    icon: string
+                  }
+                  
+                  const colorMap: Record<string, ColorScheme> = {
                     primary: { bg: 'from-primary-500/20 to-blue-500/20', border: 'border-primary-500/30', text: 'text-primary-400', icon: 'text-primary-400' },
                     green: { bg: 'from-green-500/20 to-emerald-500/20', border: 'border-green-500/30', text: 'text-green-400', icon: 'text-green-400' },
                     purple: { bg: 'from-purple-500/20 to-pink-500/20', border: 'border-purple-500/30', text: 'text-purple-400', icon: 'text-purple-400' },
                     blue: { bg: 'from-blue-500/20 to-cyan-500/20', border: 'border-blue-500/30', text: 'text-blue-400', icon: 'text-blue-400' }
-                  }[contact.color as keyof typeof colors]
+                  }
+                  
+                  const colors = colorMap[contact.color] || colorMap.primary
                   
                   return (
                     <div key={index} className="group">
@@ -644,19 +649,23 @@ function About(): JSX.Element {
 }
 
 // Missing icons for target users
-const Building2: React.FC<IconComponentProps> = ({ className }) => (
+interface IconProps {
+  className: string
+}
+
+const Building2: React.FC<IconProps> = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
   </svg>
 )
 
-const Plane: React.FC<IconComponentProps> = ({ className }) => (
+const Plane: React.FC<IconProps> = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
   </svg>
 )
 
-const TrendingUp: React.FC<IconComponentProps> = ({ className }) => (
+const TrendingUp: React.FC<IconProps> = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
   </svg>

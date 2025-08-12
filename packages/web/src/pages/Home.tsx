@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-import { Search } from 'lucide-react'
 import taipeiImage from '../assets/taipei-101.jpg'
 
 interface FeaturedGuide {

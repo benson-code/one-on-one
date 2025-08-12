@@ -1,13 +1,10 @@
 // Mock API 工具 - 模擬後端 API 響應
-import { safeLocalStorage } from './errorHandler'
 import { 
   User, 
   Guide, 
-  Customer, 
   Booking, 
   UserType, 
   RegisterData, 
-  ApiResponse,
   createDefaultUser,
   createDefaultGuide
 } from '../types'

@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode, useRef } from 'react'
-import axios from 'axios'
+import { createContext, useContext, useState, useEffect, ReactNode, useRef } from 'react'
 import { withErrorHandling } from '../utils/errorHandler'
 import { Notification, NotificationContextType, createDefaultNotification } from '../types'
 import { logger } from '../utils/logger'
@@ -35,7 +34,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
   const [notifications, setNotifications] = useState<AppNotification[]>([])
   const [unreadCount, setUnreadCount] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(false)
-  const [realTimeEnabled, setRealTimeEnabled] = useState<boolean>(false)
+  const [realTimeEnabled, _setRealTimeEnabled] = useState<boolean>(false)
   const wsConnection = useRef<WebSocket | null>(null)
 
   // 初始化通知系統
@@ -161,7 +160,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
   }, '標記所有通知為已讀')
 
   // 獲取通知列表
-  const fetchNotifications = withErrorHandling(async (userId: string) => {
+  const fetchNotifications = withErrorHandling(async (_userId: string) => {
     setLoading(true)
     
     try {

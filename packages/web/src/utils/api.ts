@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { safeLocalStorage } from './errorHandler'
 import { logger } from './logger'
-import { ApiResponse, PaginatedResponse } from '../types'
+import { ApiResponse } from '../types'
 
 // API 基礎配置
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
@@ -304,7 +304,7 @@ export const downloadFile = async (url: string, filename: string): Promise<void>
 export const healthCheck = async (): Promise<{ healthy: boolean; error?: string; [key: string]: any }> => {
   try {
     const response = await apiClient.get<{ healthy: boolean; [key: string]: any }>('/health')
-    return { healthy: true, ...response.data }
+    return { ...response.data, healthy: true }
   } catch (error) {
     return { 
       healthy: false, 

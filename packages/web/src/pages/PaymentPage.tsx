@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { Wallet, Copy, Check, AlertCircle, Shield, Clock, DollarSign } from 'lucide-react'
+import { Wallet, Copy, Check, AlertCircle, Shield, DollarSign } from 'lucide-react'
 import { safeLocalStorage, logError } from '../utils/errorHandler'
+import { Booking } from '../types'
 
 function PaymentPage() {
   const { bookingId } = useParams()
   const navigate = useNavigate()
-  const { user } = useAuth()
   
-  const [booking, setBooking] = useState(null)
+  const [booking, setBooking] = useState<Booking | null>(null)
   const [loading, setLoading] = useState(true)
   const [paymentStep, setPaymentStep] = useState('review') // review, payment, confirmation
   const [paymentData, setPaymentData] = useState({
@@ -31,8 +30,8 @@ function PaymentPage() {
       if (pendingBooking) {
         setBooking(JSON.parse(pendingBooking))
       }
-    } catch (error) {
-      logError(error, 'PaymentPage - Loading booking data')
+    } catch (error: unknown) {
+      logError(error as Error, 'PaymentPage - Loading booking data')
       // 如果無法載入預訂資料，導航到首頁
       navigate('/')
       return
@@ -40,13 +39,13 @@ function PaymentPage() {
     setLoading(false)
   }, [bookingId, navigate])
 
-  const copyToClipboard = async (text) => {
+  const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch (error) {
-      logError(error, 'PaymentPage - Copy to clipboard')
+    } catch (error: unknown) {
+      logError(error as Error, 'PaymentPage - Copy to clipboard')
       // 提供備用複製方式
       try {
         const textArea = document.createElement('textarea')
@@ -57,14 +56,14 @@ function PaymentPage() {
         document.body.removeChild(textArea)
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
-      } catch (fallbackError) {
-        logError(fallbackError, 'PaymentPage - Fallback copy method')
+      } catch (fallbackError: unknown) {
+        logError(fallbackError as Error, 'PaymentPage - Fallback copy method')
         alert('無法自動複製，請手動選擇並複製地址')
       }
     }
   }
 
-  const handlePaymentSubmit = async (e) => {
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     if (!paymentData.walletAddress || !paymentData.transactionHash) {
@@ -80,12 +79,12 @@ function PaymentPage() {
       await new Promise(resolve => setTimeout(resolve, 3000))
       
       // Update booking status
-      const updatedBooking = {
+      const updatedBooking = booking ? {
         ...booking,
-        paymentStatus: 'paid',
-        status: 'confirmed',
+        paymentStatus: 'completed' as const,
+        status: 'confirmed' as const,
         transactionHash: paymentData.transactionHash
-      }
+      } : null
       
       localStorage.setItem('confirmedBooking', JSON.stringify(updatedBooking))
       localStorage.removeItem('pendingBooking')

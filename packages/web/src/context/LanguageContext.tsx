@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { LanguageContextType, Language, Languages } from '../types'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { LanguageContextType, Language } from '../types'
 
 const LanguageContext = createContext<LanguageContextType>({
   currentLanguage: 'zh-tw',
