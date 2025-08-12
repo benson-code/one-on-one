@@ -1,9 +1,24 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { theme } from '../styles';
 import { useAuth } from '../context/AuthContext';
 
-function Header({ showLogo = true, showProfile = true }) {
+interface HeaderProps {
+  showLogo?: boolean;
+  showProfile?: boolean;
+}
+
+interface Styles {
+  container: ViewStyle;
+  logoContainer: ViewStyle;
+  logoIcon: ViewStyle;
+  logoText: TextStyle;
+  logoTitle: TextStyle;
+  rightContainer: ViewStyle;
+  avatar: ImageStyle;
+}
+
+function Header({ showLogo = true, showProfile = true }: HeaderProps): JSX.Element {
   const { isAuthenticated, user } = useAuth();
 
   return (
@@ -29,7 +44,7 @@ function Header({ showLogo = true, showProfile = true }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',

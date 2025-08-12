@@ -18,7 +18,7 @@ import PaymentScreen from './pages/PaymentScreen';
 
 const Stack = createStackNavigator();
 
-function App() {
+function App(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

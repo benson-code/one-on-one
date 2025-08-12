@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { theme } from '../styles';
@@ -15,11 +14,17 @@ import ProfileScreen from '../pages/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-function TabIcon({ name, color, size }) {
+interface TabIconProps {
+  name: string;
+  color: string;
+  size: number;
+}
+
+function TabIcon({ name, color, size }: TabIconProps): React.JSX.Element {
   return <Icon name={name} size={size} color={color} />;
 }
 
-function TabNavigator() {
+function TabNavigator(): React.JSX.Element {
   const { isAuthenticated, user } = useAuth();
 
   return (

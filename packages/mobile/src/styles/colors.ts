@@ -1,4 +1,31 @@
-export const colors = {
+export interface Colors {
+  primary: string;
+  background: string;
+  textPrimary: string;
+  textSecondary: string;
+  accent: string;
+  cardBackground: string;
+  buttonHover: string;
+  dark50: string;
+  dark100: string;
+  dark200: string;
+  dark300: string;
+  dark400: string;
+  dark500: string;
+  dark600: string;
+  dark700: string;
+  dark800: string;
+  dark900: string;
+  white: string;
+  black: string;
+  transparent: string;
+  success: string;
+  warning: string;
+  error: string;
+  info: string;
+}
+
+export const colors: Colors = {
   primary: '#0c92f2',
   background: '#121212',
   textPrimary: '#E0E0E0',
