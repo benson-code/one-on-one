@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, AlertCircle, User, Stethoscope } from 'lucide-react'
 import { UserType } from '../types'
 
 interface FormData {
@@ -104,24 +104,50 @@ function Login(): JSX.Element {
                 <button
                   type="button"
                   onClick={() => setFormData({...formData, userType: 'customer'})}
-                  className={`p-3 rounded-xl border-2 transition-all ${
+                  className={`relative p-4 rounded-xl border-2 transition-all duration-300 transform ${
                     formData.userType === 'customer'
-                      ? 'border-primary-500 bg-primary-500/10'
-                      : 'border-dark-600 hover:border-dark-500'
+                      ? 'border-green-500 bg-green-500/10 scale-105 shadow-lg shadow-green-500/25'
+                      : 'border-dark-600 hover:border-dark-500 hover:scale-102'
                   }`}
                 >
-                  客戶
+                  <div className="flex flex-col items-center space-y-2">
+                    <User className={`w-6 h-6 transition-colors ${
+                      formData.userType === 'customer' ? 'text-green-500' : 'text-dark-400'
+                    }`} />
+                    <span className="font-medium">客戶</span>
+                    <span className="text-xs text-dark-400 text-center">
+                      尋求醫療服務
+                    </span>
+                  </div>
+                  {formData.userType === 'customer' && (
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full">
+                      <div className="w-full h-full bg-green-500 rounded-full animate-ping" />
+                    </div>
+                  )}
                 </button>
                 <button
                   type="button"
                   onClick={() => setFormData({...formData, userType: 'guide'})}
-                  className={`p-3 rounded-xl border-2 transition-all ${
+                  className={`relative p-4 rounded-xl border-2 transition-all duration-300 transform ${
                     formData.userType === 'guide'
-                      ? 'border-primary-500 bg-primary-500/10'
-                      : 'border-dark-600 hover:border-dark-500'
+                      ? 'border-blue-500 bg-blue-500/10 scale-105 shadow-lg shadow-blue-500/25'
+                      : 'border-dark-600 hover:border-dark-500 hover:scale-102'
                   }`}
                 >
-                  醫師
+                  <div className="flex flex-col items-center space-y-2">
+                    <Stethoscope className={`w-6 h-6 transition-colors ${
+                      formData.userType === 'guide' ? 'text-blue-500' : 'text-dark-400'
+                    }`} />
+                    <span className="font-medium">醫師</span>
+                    <span className="text-xs text-dark-400 text-center">
+                      提供醫療服務
+                    </span>
+                  </div>
+                  {formData.userType === 'guide' && (
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full">
+                      <div className="w-full h-full bg-blue-500 rounded-full animate-ping" />
+                    </div>
+                  )}
                 </button>
               </div>
             </div>
