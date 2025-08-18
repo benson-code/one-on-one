@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Mail, Lock, Eye, EyeOff, User, AlertCircle } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, User, AlertCircle, Stethoscope, CheckCircle } from 'lucide-react'
 import { RegisterData } from '../types'
 
 interface AuthResult {
@@ -32,6 +32,14 @@ function Register(): JSX.Element {
   const [error, setError] = useState<string>('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+    setError('')
+  }
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -118,36 +126,199 @@ function Register(): JSX.Element {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* User Type Selection */}
+            {/* User Type Selection with Enhanced UI */}
             <div>
               <label className="block text-sm font-medium mb-3">
-用戶類型
+                選擇註冊身份
               </label>
+              
+              {/* Current Selection Indicator */}
+              <div className="mb-4 p-3 bg-dark-700/50 rounded-lg border border-dark-600">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-3 h-3 rounded-full animate-pulse ${
+                      formData.userType === 'customer' ? 'bg-green-500' : 'bg-blue-500'
+                    }`} />
+                    <span className="text-sm">
+                      目前選擇：
+                      <span className={`ml-1 font-medium ${
+                        formData.userType === 'customer' ? 'text-green-400' : 'text-blue-400'
+                      }`}>
+                        {formData.userType === 'customer' ? '患者/客戶' : '醫療顧問'}
+                      </span>
+                    </span>
+                  </div>
+                  <CheckCircle className={`w-4 h-4 ${
+                    formData.userType === 'customer' ? 'text-green-500' : 'text-blue-500'
+                  }`} />
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <button
                   type="button"
                   onClick={() => setFormData({...formData, userType: 'customer'})}
-                  className={`p-3 rounded-xl border-2 transition-all ${
+                  className={`relative p-4 rounded-xl border-2 transition-all duration-300 transform ${
                     formData.userType === 'customer'
-                      ? 'border-primary-500 bg-primary-500/10'
-                      : 'border-dark-600 hover:border-dark-500'
+                      ? 'border-green-500 bg-green-500/10 scale-105 shadow-lg shadow-green-500/25'
+                      : 'border-dark-600 hover:border-dark-500 hover:scale-102'
                   }`}
                 >
-客戶
+                  <div className="flex flex-col items-center space-y-2">
+                    <User className={`w-6 h-6 transition-colors ${
+                      formData.userType === 'customer' ? 'text-green-500' : 'text-dark-400'
+                    }`} />
+                    <span className="font-medium">患者/客戶</span>
+                    <span className="text-xs text-dark-400 text-center">
+                      尋求醫療服務與諮詢
+                    </span>
+                  </div>
+                  {formData.userType === 'customer' && (
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full">
+                      <div className="w-full h-full bg-green-500 rounded-full animate-ping" />
+                    </div>
+                  )}
                 </button>
+
                 <button
                   type="button"
                   onClick={() => setFormData({...formData, userType: 'guide'})}
-                  className={`p-3 rounded-xl border-2 transition-all ${
+                  className={`relative p-4 rounded-xl border-2 transition-all duration-300 transform ${
                     formData.userType === 'guide'
-                      ? 'border-primary-500 bg-primary-500/10'
-                      : 'border-dark-600 hover:border-dark-500'
+                      ? 'border-blue-500 bg-blue-500/10 scale-105 shadow-lg shadow-blue-500/25'
+                      : 'border-dark-600 hover:border-dark-500 hover:scale-102'
                   }`}
                 >
-醫師
+                  <div className="flex flex-col items-center space-y-2">
+                    <Stethoscope className={`w-6 h-6 transition-colors ${
+                      formData.userType === 'guide' ? 'text-blue-500' : 'text-dark-400'
+                    }`} />
+                    <span className="font-medium">醫療顧問</span>
+                    <span className="text-xs text-dark-400 text-center">
+                      提供專業醫療服務
+                    </span>
+                  </div>
+                  {formData.userType === 'guide' && (
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full">
+                      <div className="w-full h-full bg-blue-500 rounded-full animate-ping" />
+                    </div>
+                  )}
                 </button>
               </div>
             </div>
+
+            {/* Dynamic Content Based on User Type */}
+            {formData.userType === 'guide' && (
+              <div className="space-y-4 p-4 bg-blue-900/20 rounded-xl border border-blue-700/30 transition-all duration-500">
+                <div className="flex items-center space-x-2 mb-3">
+                  <Stethoscope className="w-5 h-5 text-blue-400" />
+                  <h3 className="text-lg font-semibold text-blue-300">專業資訊</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-blue-200">專業領域</label>
+                    <select 
+                      name="specialty"
+                      className="input-field bg-blue-900/30 border-blue-600 focus:border-blue-400"
+                      onChange={handleSelectChange}
+                    >
+                      <option value="">選擇專業領域</option>
+                      <option value="cardiology">心臟科</option>
+                      <option value="orthopedics">骨科</option>
+                      <option value="neurology">神經科</option>
+                      <option value="oncology">腫瘤科</option>
+                      <option value="dermatology">皮膚科</option>
+                      <option value="general">全科醫學</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-blue-200">執業年資</label>
+                    <select 
+                      name="experience"
+                      className="input-field bg-blue-900/30 border-blue-600 focus:border-blue-400"
+                      onChange={handleSelectChange}
+                    >
+                      <option value="">選擇執業年資</option>
+                      <option value="1-3">1-3年</option>
+                      <option value="4-7">4-7年</option>
+                      <option value="8-15">8-15年</option>
+                      <option value="15+">15年以上</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-blue-200">執業證書號碼</label>
+                  <input
+                    name="licenseNumber"
+                    type="text"
+                    className="input-field bg-blue-900/30 border-blue-600 focus:border-blue-400"
+                    placeholder="請輸入執業證書號碼"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            )}
+
+            {formData.userType === 'customer' && (
+              <div className="space-y-4 p-4 bg-green-900/20 rounded-xl border border-green-700/30 transition-all duration-500">
+                <div className="flex items-center space-x-2 mb-3">
+                  <User className="w-5 h-5 text-green-400" />
+                  <h3 className="text-lg font-semibold text-green-300">個人偏好</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-green-200">首選語言</label>
+                    <select 
+                      name="preferredLanguage"
+                      className="input-field bg-green-900/30 border-green-600 focus:border-green-400"
+                      onChange={handleSelectChange}
+                    >
+                      <option value="zh-TW">繁體中文</option>
+                      <option value="en">English</option>
+                      <option value="ja">日本語</option>
+                      <option value="ko">한국어</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-green-200">關注領域</label>
+                    <select 
+                      name="interestedArea"
+                      className="input-field bg-green-900/30 border-green-600 focus:border-green-400"
+                      onChange={handleSelectChange}
+                    >
+                      <option value="">選擇關注的醫療領域</option>
+                      <option value="preventive">預防保健</option>
+                      <option value="cosmetic">美容整形</option>
+                      <option value="dental">牙科治療</option>
+                      <option value="fertility">生育諮詢</option>
+                      <option value="chronic">慢性病管理</option>
+                      <option value="wellness">健康養生</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-green-200">預算範圍 (USD)</label>
+                  <select 
+                    name="budgetRange"
+                    className="input-field bg-green-900/30 border-green-600 focus:border-green-400"
+                    onChange={handleSelectChange}
+                  >
+                    <option value="">選擇預算範圍</option>
+                    <option value="under-5000">$5,000以下</option>
+                    <option value="5000-15000">$5,000 - $15,000</option>
+                    <option value="15000-30000">$15,000 - $30,000</option>
+                    <option value="30000-50000">$30,000 - $50,000</option>
+                    <option value="over-50000">$50,000以上</option>
+                  </select>
+                </div>
+              </div>
+            )}
 
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
@@ -277,13 +448,34 @@ function Register(): JSX.Element {
               </div>
             </div>
 
-            {/* Submit Button */}
+            {/* Enhanced Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full"
+              className={`btn-primary w-full relative overflow-hidden transition-all duration-300 ${
+                loading ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-primary-500/25'
+              }`}
             >
-              {loading ? '載入中...' : '註冊'}
+              <div className="flex items-center justify-center space-x-2">
+                {loading && (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                )}
+                <span>
+                  {loading 
+                    ? '建立帳戶中...' 
+                    : `註冊為${formData.userType === 'customer' ? '患者/客戶' : '醫療顧問'}`
+                  }
+                </span>
+                {formData.userType === 'customer' ? (
+                  <User className="w-4 h-4" />
+                ) : (
+                  <Stethoscope className="w-4 h-4" />
+                )}
+              </div>
+              
+              {!loading && (
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
+              )}
             </button>
           </form>
 

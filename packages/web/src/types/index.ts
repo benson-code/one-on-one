@@ -180,6 +180,14 @@ export interface RegisterData {
   userType: UserType
   phoneNumber: string
   location: string
+  // 醫師專用欄位
+  specialty?: string
+  experience?: string
+  licenseNumber?: string
+  // 客戶專用欄位
+  preferredLanguage?: string
+  interestedArea?: string
+  budgetRange?: string
 }
 
 export interface LoginData {
@@ -367,6 +375,36 @@ export const formatCurrency = (amount: number, currency: string = 'USD'): string
     style: 'currency',
     currency: currency
   }).format(amount)
+}
+
+// Mock Guide 類型 (用於開發階段的展示資料)
+export interface MockGuide {
+  id: number
+  name: string
+  location: string
+  rating: number
+  reviewCount: number
+  price: number
+  hourlyRate: boolean
+  avatar: string
+  languages: string[]
+  specialties: string[]
+  description: string
+  verified: boolean
+  responseTime: string
+  reviews?: Array<{
+    id: number
+    customerName: string
+    rating: number
+    comment: string
+    date: string
+  }>
+}
+
+// 擴展 Booking 類型以包含展示所需欄位
+export interface ExtendedBooking extends Booking {
+  guideName?: string
+  total?: number
 }
 
 // 預設資料創建函數

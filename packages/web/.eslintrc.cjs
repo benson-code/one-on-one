@@ -7,7 +7,6 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended'
   ],
@@ -51,14 +50,9 @@ module.exports = {
     'no-new-func': 'error',
     
     // 代碼風格
-    'indent': ['warn', 2],
     'quotes': ['warn', 'single'],
     'semi': ['warn', 'never'],
-    'comma-dangle': ['warn', 'never'],
-    
-    // JSX 風格
-    'react/jsx-indent': ['warn', 2],
-    'react/jsx-indent-props': ['warn', 2]
+    'comma-dangle': ['warn', 'never']
   },
   settings: {
     react: {

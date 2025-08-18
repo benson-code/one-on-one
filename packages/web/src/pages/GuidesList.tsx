@@ -1,22 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MapPin, Star, Users, Search, Filter, ChevronDown } from 'lucide-react'
-
-interface MockGuide {
-  id: number
-  name: string
-  location: string
-  rating: number
-  reviewCount: number
-  price: number
-  hourlyRate: boolean
-  avatar: string
-  languages: string[]
-  specialties: string[]
-  description: string
-  verified: boolean
-  responseTime: string
-}
+import { MockGuide } from '../types'
 
 function GuidesList() {
   const [guides, setGuides] = useState<MockGuide[]>([])
@@ -333,21 +318,22 @@ function GuidesList() {
         {/* Guides Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGuides.map((guide) => (
-            <div key={guide.id} className="card hover:scale-105 transition-transform duration-200">
-              {/* Guide Avatar and Basic Info */}
-              <div className="text-center mb-4">
-                <div className="w-24 h-24 bg-dark-700 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-12 h-12 text-dark-400" />
-                </div>
-                
-                <div className="flex items-center justify-center mb-2">
-                  <h3 className="text-xl font-semibold mr-2">{guide.name}</h3>
-                  {guide.verified && (
-                    <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs">✓</span>
-                    </div>
-                  )}
-                </div>
+            <div key={guide.id} className="card card-3d">
+              <div className="card-3d-content">
+                {/* Guide Avatar and Basic Info */}
+                <div className="text-center mb-4">
+                  <div className="w-24 h-24 bg-dark-700 rounded-full mx-auto mb-4 flex items-center justify-center float-animation">
+                    <Users className="w-12 h-12 text-dark-400" />
+                  </div>
+                  
+                  <div className="flex items-center justify-center mb-2">
+                    <h3 className="text-xl font-semibold mr-2">{guide.name}</h3>
+                    {guide.verified && (
+                      <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center verified-glow">
+                        <span className="text-white text-xs">✓</span>
+                      </div>
+                    )}
+                  </div>
                 
                 <div className="flex items-center justify-center text-dark-300 mb-2">
                   <MapPin className="w-4 h-4 mr-1" />
@@ -416,6 +402,7 @@ function GuidesList() {
                 >
 立即預訂
                 </Link>
+                </div>
               </div>
             </div>
           ))}
