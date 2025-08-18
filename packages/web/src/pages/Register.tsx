@@ -262,63 +262,6 @@ function Register(): JSX.Element {
               </div>
             )}
 
-            {formData.userType === 'customer' && (
-              <div className="space-y-4 p-4 bg-green-900/20 rounded-xl border border-green-700/30 transition-all duration-500">
-                <div className="flex items-center space-x-2 mb-3">
-                  <User className="w-5 h-5 text-green-400" />
-                  <h3 className="text-lg font-semibold text-green-300">個人偏好</h3>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-green-200">首選語言</label>
-                    <select 
-                      name="preferredLanguage"
-                      className="input-field bg-green-900/30 border-green-600 focus:border-green-400"
-                      onChange={handleSelectChange}
-                    >
-                      <option value="zh-TW">繁體中文</option>
-                      <option value="en">English</option>
-                      <option value="ja">日本語</option>
-                      <option value="ko">한국어</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-green-200">關注領域</label>
-                    <select 
-                      name="interestedArea"
-                      className="input-field bg-green-900/30 border-green-600 focus:border-green-400"
-                      onChange={handleSelectChange}
-                    >
-                      <option value="">選擇關注的醫療領域</option>
-                      <option value="preventive">預防保健</option>
-                      <option value="cosmetic">美容整形</option>
-                      <option value="dental">牙科治療</option>
-                      <option value="fertility">生育諮詢</option>
-                      <option value="chronic">慢性病管理</option>
-                      <option value="wellness">健康養生</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-green-200">預算範圍 (USD)</label>
-                  <select 
-                    name="budgetRange"
-                    className="input-field bg-green-900/30 border-green-600 focus:border-green-400"
-                    onChange={handleSelectChange}
-                  >
-                    <option value="">選擇預算範圍</option>
-                    <option value="under-5000">$5,000以下</option>
-                    <option value="5000-15000">$5,000 - $15,000</option>
-                    <option value="15000-30000">$15,000 - $30,000</option>
-                    <option value="30000-50000">$30,000 - $50,000</option>
-                    <option value="over-50000">$50,000以上</option>
-                  </select>
-                </div>
-              </div>
-            )}
 
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
